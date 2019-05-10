@@ -25,3 +25,8 @@ Route::delete('/saveForLater{product}', 'SaveForLaterController@destroy')->name(
 
 Route::get('/checkout', 'checkoutController@index')->name('checkout.index');
 
+
+// Rave pay routes
+Route::post('/pay', 'RaveController@initialize')->name('pay');
+Route::post('/rave/callback', 'RaveController@callback')->name('callback');
+
