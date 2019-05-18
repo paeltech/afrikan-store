@@ -36,6 +36,14 @@ class ProductsTableSeeder extends Seeder
             'description'=>'African bjnfkdjnkseeag mjfdkjade from kitenge and found only in africa not eslsewhere',
         ]);
 
+        Product::Create([
+            'name'=>'Kirk band',
+            'slug'=>'kirk band',
+            'details'=>'Good and nice kirk band',
+            'price'=>39,
+            'description'=>'African bjnfkdjnkseeag mjfdkjade from kitenge and found only in africa not eslsewhere',
+        ]);
+
 
     }
 }

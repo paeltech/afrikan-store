@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Subcategory;
 
 class ShopController extends Controller
 {
@@ -14,12 +15,23 @@ class ShopController extends Controller
      */
     public function index()
     {
-        $products = Product::inRandomOrder()->take(8)->get();
-        
-        return view('products.shop')->with('products', $products);
+        if (request()->subcategory) {
+            $products = Product::with('subcategories')->whereHas('subcategories', function ($query) {
+                $query->where('slug', request()->subcategory);
+            })->get();
+            $subcategories = Subcategory::all();
+        } else {
+            $products = Product::inRandomOrder()->take(8)->get();
+            $subcategories = Subcategory::all();
+        }
+
+        return view('products.shop')->with([
+            'products' => $products,
+            'subcategories'=> $subcategories
+        ]);
     }
 
-    
+
 
     /**
      * Display the specified resource.
@@ -31,7 +43,7 @@ class ShopController extends Controller
     {
         $product = Product::where('slug', $slug)->firstOrFail();
         $mightAlsoLike = Product::where('slug', '!=', $slug)->mightAlsoLike()->get();
-        
+
         return view('products.product')->with([
             'product' => $product,
             'mightAlsoLike' => $mightAlsoLike,

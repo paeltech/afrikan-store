@@ -31,9 +31,9 @@
                     <li class="uk-parent">
                         <a href="#">Fashion</a>
                         <ul class="uk-nav-sub">
-                            <li><a href="#">Footware</a></li>
-                            <li><a href="#">Clothing</a></li>
-                            <li><a href="#">Accessories</a></li>
+                            @foreach ($subcategories as $subcategory)
+                        <li><a href="{{ route('shop.index', ['subcategory' => $subcategory->slug])}}">{{ $subcategory->name }}</a></li>
+                            @endforeach
                         </ul>
                     </li>
                     <li class="uk-parent">
@@ -49,7 +49,7 @@
             <div class="uk-width-expand">
                 <h5 class="uk-float-right uk-visible@m">Price: <span class="text-light">Low to high | High to low</span></h5>
 
-                <div class="uk-grid-match uk-child-width-1-3@m uk-margin-large-top" uk-grid="parallax: 150">
+                <div class="uk-child-width-1-3@m uk-margin-large-top" uk-grid="parallax: 150">
                     @foreach ($products as $product)
                         <div>
                             <div class="uk-card-small uk-card-hover featured-item">
@@ -60,7 +60,11 @@
                                 </div>
                                 <div class="uk-card-body featured-pro">
                                     <h4 class="featured-card-title uk-text-capitalize"><a href="{{ route('shop.show', $product->slug) }}">{{ $product->name }}</a></h4>
-                                    <p class="product-desc text-smaller uk-text-capitalize">{{ $product->details }} <span class="uk-float-right price">{{ '$'.$product->price }}</span></p>
+                                    <div>
+                                            <p class="product-desc text-smaller uk-text-capitalize">{{ $product->details }}</p>
+                                    </div>
+                                    <span class="price">{{ '$'.$product->price }}</span>
+                                    {{-- <span class="uk-badge uk-float-right stock">OUT OF STOCK</span> --}}
                                 </div>
                             </div>
                         </div>

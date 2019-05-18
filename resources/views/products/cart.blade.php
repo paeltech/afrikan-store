@@ -50,7 +50,7 @@
             <div class="cart-items">
                 @foreach(Cart::instance('default')->content() as $item)
                     <div class="uk-clearfix cart-item">
-                        <div>
+                        <div class="uk-float-left">
                             <img src="img/categories/bag.jpg" width="100" height="100" class="uk-float-left">
 
                             <div class="uk-float-left cart-desc">
@@ -68,18 +68,15 @@
                                     </form>
                                 </p>
                             </div>
-                            <div class="uk-float-left uk-margin-large-left">
-                                <form action="" class="cart-select">
-                                    <select class="uk-select">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                    </select>
-                                </form>
+                            <div class="uk-float-left uk-margin-large-left cart-select">
+                                <select class="uk-select quantity" data-id="{{ $item->rowId }}">
+                                        @for ($i = 1; $i < 5 + 1 ; $i++)
+                                            <option {{ $item->qty == $i ? 'selected' : '' }}>{{ $i }}</option>
+                                        @endfor
+                                </select>
                             </div>
                             <div class="uk-float-left uk-margin-large-left">
-                                <p class="cart-price text-bigger color-primary text-bold">${{ $item->model->price }}</p>
+                                <p class="cart-price text-bigger color-primary text-bold">${{ $item->subtotal }}</p>
                             </div>
                             <div class="uk-float-right uk-margin-large-left">
                                 <form action="{{ route('cart.remove', $item->rowId)}}" method="POST">
@@ -137,7 +134,7 @@
                     <div class="cart-items">
                         @foreach(Cart::instance('saveForLater')->content() as $item)
                             <div class="uk-clearfix cart-item">
-                                <div>
+                                <div class="uk-float-left">
                                     <img src="img/categories/bag.jpg" width="100" height="100" class="uk-float-left">
 
                                     <div class="uk-float-left cart-desc">
@@ -155,16 +152,6 @@
                                                     <button type="submit" class="uk-button uk-button-link color-muted">Move to cart</button>
                                             </form>
                                         </p>
-                                    </div>
-                                    <div class="uk-float-left uk-margin-large-left">
-                                        <form action="" class="cart-select">
-                                            <select class="uk-select">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                            </select>
-                                        </form>
                                     </div>
                                     <div class="uk-float-left uk-margin-large-left">
                                         <p class="cart-price text-bigger color-primary text-bold">${{ $item->model->price }}</p>
@@ -186,4 +173,30 @@
         </div>
     </section>
     @include('partials.might-like')
+@endsection
+
+
+@section('extra-js')
+<script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        (function(){
+            const classname = document.querySelectorAll('.quantity')
+            Array.from(classname).forEach(function(element) {
+                element.addEventListener('change', function() {
+                    const id = element.getAttribute('data-id')
+                    axios.patch(`/cart/${id}`, {
+                        quantity: this.value
+                    })
+                    .then(function (response) {
+                         console.log(response);
+                         window.location.href = '{{ route('cart.index') }}'
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                        window.location.href = '{{ route('cart.index') }}'
+                    });
+                })
+            })
+        })();
+    </script>
 @endsection

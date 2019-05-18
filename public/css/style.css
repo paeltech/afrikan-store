@@ -301,6 +301,15 @@ h6 {
     margin-top: -10px;
 }
 
+.stock {
+    padding: 4px 10px;
+    margin-top: 10px;
+}
+
+.featured-pro .uk-badge {
+    border-radius: 5px;
+}
+
 /*.............Featured products section.............*/
 
 /*.............Single product section.............*/
@@ -335,7 +344,7 @@ h6 {
 
 .cart-items,
 .cart-messages {
-    width: 70%;
+    width: 80%;
 }
 
 .cart-item {
@@ -368,6 +377,7 @@ h6 {
 .cart-desc p {
     margin: 0;
     padding: 5px 0;
+    box-sizing: border-box;
 }
 
 .coupon-code p {
