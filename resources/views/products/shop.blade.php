@@ -55,7 +55,7 @@
                             <div class="uk-card-small uk-card-hover featured-item">
                                 <div class="uk-card-media-top cart-card-img">
                                     <a href="{{ route('shop.show', $product->slug)}}">
-                                        <img data-src="img/categories/drawings.jpg" data-srcset="img/categories/drawings.jpg 270w, img/categories/drawings@2x.jpg 540w" sizes="(min-width: 270px) 270px, 100vw" width="270" height="230" alt="{{ $product->name }}" uk-img>
+                                        <img data-src="img/categories/crafts.jpg" data-srcset="img/categories/crafts.jpg 270w, img/categories/crafts@2x.jpg 540w" sizes="(min-width: 270px) 270px, 100vw" width="270" height="230" alt="{{ $product->name }}" uk-img>
                                     </a>
                                 </div>
                                 <div class="uk-card-body featured-pro">

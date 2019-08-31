@@ -23,7 +23,7 @@ $array = array(array('metaname' => 'color', 'metavalue' => 'blue'),
     {{-- <input type="hidden" name="ref" value="MY_NAME_5uwh2a2a7f270ac98" /> <!-- Ucomment and  Replace the value with your transaction reference. It must be unique per transaction. You can delete this line if you want one to be generated for you. --> --}}
     <input type="hidden" name="logo" value="https://pbs.twimg.com/profile_images/915859962554929153/jnVxGxVj.jpg" /> <!-- Replace the value with your logo url (Optional, present in .env)-->
     <input type="hidden" name="title" value="Afrikan store Order number 74985hd" /> <!-- Replace the value with your transaction title (Optional, present in .env)-->
-    <input type="submit" value="Buy"  />
+    <input type="submit" value="Pay"  />
 </form>
 
 @section('extra-js')
